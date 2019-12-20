@@ -17,6 +17,7 @@ public class Main {
         for (int i = 0; i < Person.data.size(); i++) {
             dict.put(Person.data.get(i)[2],Person.data.get(i)[0]);
         }
-        System.out.println(dict.get("57887985047"));
+        System.out.println("Initial Dictionary is: " + dict);
+        System.out.println("The Value is: " + dict.get("50410456832"));
     }
 }
