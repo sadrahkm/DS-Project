@@ -1,3 +1,4 @@
+import java.awt.event.PaintEvent;
 import java.util.*;
 
 public class Person extends Node {
@@ -7,15 +8,20 @@ public class Person extends Node {
     String birthDate;
     String birthPlace;
     String workPlace;
-    static CSVReader test = new CSVReader();
-    static ArrayList<String[]> data = test.get("E:\\DS project\\src\\data\\people.csv");
-    static  Dictionary<String,String> dict = new Hashtable<>();
-    public static void make() {
-        for (int i = 0; i < data.size(); i++)
-            for (int j = 0; j < data.get(i).length; j++)
-                dict.put(data.get(i)[2],data.get(i)[j]);
+    Person(String name,String lastName,String key,String birthDate,String birthPlace,String workPlace) {
+    this.name=name;
+    this.lastName=lastName;
+    this.key=key;
+    this.birthDate=birthDate;
+    this.birthPlace=birthPlace;
+    this.workPlace=workPlace;
     }
-    public static void showData(){
+    static  Dictionary<String,Person> dict = new Hashtable<>();
+    public static void make(ArrayList<String[]> data) {
+        for (int i = 0; i < data.size(); i++)
+                dict.put(data.get(i)[2],new Person(data.get(i)[0],data.get(i)[1],data.get(i)[2],data.get(i)[3],data.get(i)[4],data.get(i)[5]));
+    }
+    public static void showData(ArrayList<String[]> data){
         for (int i = 0; i < data.size(); i++) {
             for (int j = 0; j < data.get(i).length; j++) {
                 System.out.print(data.get(i)[j] + ",");
