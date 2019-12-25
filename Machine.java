@@ -5,16 +5,26 @@ public class Machine extends Node {
     String personCode;
     String color;
     String model;
-    String key = pelak;
-    static CSVReader test = new CSVReader();
-    static ArrayList<String[]> data = test.get("C:\\Users\\Sadra Hakim\\Desktop\\data\\cars.csv");
+    String key;
+    static Dictionary<String, Machine> dict = new Hashtable<>();
 
-    public static void showData(){
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = 0; j < data.get(i).length; j++) {
-                System.out.print(data.get(i)[j] + ",");
-            }
-            System.out.println();
+    Machine(String pelak, String personCode, String model, String color) {
+        this.pelak = pelak;
+        this.personCode = personCode;
+        this.color = color;
+        this.model = model;
+        this.key = pelak;
+    }
+
+    public static void make(ArrayList<String[]> data) {
+        for (int i = 0; i < data.size(); i++)
+            dict.put(data.get(i)[0], new Machine(data.get(i)[0], data.get(i)[1], data.get(i)[2], data.get(i)[3]));
+    }
+
+    public static void showData() {
+        Enumeration e = dict.elements();
+        while (e.hasMoreElements()) {
+            System.out.println(e.nextElement());
         }
     }
 }

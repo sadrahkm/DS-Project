@@ -9,7 +9,7 @@ public class CSVReader {
         String cvsSplitBy = ",";
         ArrayList<String[]> data = new ArrayList<>();
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(new File(path)));
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator

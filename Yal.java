@@ -1,6 +1,6 @@
 import java.util.*;
 
-abstract class Yal extends Dictionary {
+abstract class Yal {
     String key;
     Object from;
     Object to;

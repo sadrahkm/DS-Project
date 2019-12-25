@@ -4,15 +4,26 @@ public class Telephone extends Node {
     String personCode;
     String number;
     String operator;
-    String key = number;
+    String key;
     static CSVReader test = new CSVReader();
-    static ArrayList<String[]> data = test.get("C:\\Users\\Sadra Hakim\\Desktop\\data\\phones.csv");
-    public static void showData(){
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = 0; j < data.get(i).length; j++) {
-                System.out.print(data.get(i)[j] + ",");
-            }
-            System.out.println();
+    static Dictionary<String, Telephone> dict = new Hashtable<>();
+
+    Telephone(String personCode, String number, String operator) {
+        this.personCode = personCode;
+        this.number = number;
+        this.operator = operator;
+        this.key = number;
+    }
+
+    public static void make(ArrayList<String[]> data) {
+        for (int i = 0; i < data.size(); i++)
+            dict.put(data.get(i)[2], new Telephone(data.get(i)[0], data.get(i)[1], data.get(i)[2]));
+    }
+
+    public static void showData() {
+        Enumeration e = dict.elements();
+        while (e.hasMoreElements()) {
+            System.out.println(e.nextElement());
         }
     }
 }
