@@ -4,6 +4,12 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        CSVReader read = new CSVReader();
+        ArrayList<String[]> homes = read.get("src/data/homes.csv");
+        ArrayList<String[]> machines = read.get("src/data/homes.csv");
+        ArrayList<String[]> phones = read.get("src/data/homes.csv");
+        ArrayList<String[]> cars = read.get("src/data/homes.csv");
+        ArrayList<String[]> accounts = read.get("src/data/homes.csv");
         Telephone.showData();
         System.out.println("---------------------");
         Person.showData();
@@ -13,11 +19,5 @@ public class Main {
         House.showData();
         System.out.println("---------------------");
         BankAccount.showData();
-        Dictionary<String,String> dict = new Hashtable<>();
-        for (int i = 0; i < Person.data.size(); i++) {
-            dict.put(Person.data.get(i)[2],Person.data.get(i)[0]);
-        }
-        System.out.println("Initial Dictionary is: " + dict);
-        System.out.println("The Value is: " + dict.get("50410456832"));
     }
 }
