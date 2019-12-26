@@ -35,6 +35,34 @@ public class Person extends Node {
             System.out.println(temp.name + " , " + temp.lastName + " , " + temp.key + " , " + temp.birthDate + " , " + temp.birthPlace);
         }
     }
+    public Dictionary<String,Person> find_House(Dictionary<String,Person> dictionary){
+        Dictionary<String,Person> dic_find_House= null;
+        Enumeration e1 = House.dict.elements();
+        Enumeration e2 = dictionary.keys();
+        while(e1.hasMoreElements()){
+            House k = (House) e1.nextElement();
+            while(e2.hasMoreElements()){
+                if(e2.nextElement().equals(k.personCode)){
+                    dic_find_House.put(k.personCode,dict.get(k.personCode));
+                }
+            }
+        }
+        return dic_find_House;
+    }
+    public Dictionary<String,Person> find_Machine(Dictionary<String,String> dictionary){
+        Dictionary<String,Person> dic_find_Machine = null;
+        Enumeration e1 = Machine.dict.elements();
+        Enumeration e2 = dictionary.keys();
+        while(e1.hasMoreElements()){
+            Machine m = (Machine) e1.nextElement();
+            while(e2.hasMoreElements()){
+                if(e2.nextElement().equals(m.personCode)){
+                    dic_find_Machine.put(m.personCode,dict.get(m.personCode));
+                }
+            }
+        }
+        return dic_find_Machine;
+    }
 
     static public Dictionary<String, Person> find_Sazmani() {
         Dictionary<String, Person> dic_find = new Hashtable<>();
