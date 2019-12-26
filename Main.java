@@ -1,4 +1,5 @@
 //package com.company;
+
 import java.io.*;
 import java.util.*;
 
@@ -9,7 +10,12 @@ public class Main {
         House.make("src/data/homes.csv");
         BankAccount.make("src/data/accounts.csv");
         Telephone.make("src/data/phones.csv");
-        Person.findSazmani(Person.dict);
+        Dictionary<String, Person> temp = Person.find_Sazmani();
+        Enumeration e = temp.elements();
+        while (e.hasMoreElements()) {
+            Person p = (Person) e.nextElement();
+            System.out.println(p.name);
+        }
         Telephone.showData();
         System.out.println("---------------------");
         Person.showData();
