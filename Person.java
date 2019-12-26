@@ -3,6 +3,7 @@ import java.util.*;
 
 public class Person extends Node {
     String key;
+    String code;
     String name;
     String lastName;
     String birthDate;
@@ -10,10 +11,11 @@ public class Person extends Node {
     String workPlace;
     static Dictionary<String, Person> dict = new Hashtable<>();
 
-    Person(String name, String lastName, String key, String birthDate, String birthPlace, String workPlace) {
+    Person(String name, String lastName, String code, String birthDate, String birthPlace, String workPlace) {
         this.name = name;
         this.lastName = lastName;
-        this.key = key;
+        this.code=code;
+        this.key = code;
         this.birthDate = birthDate;
         this.birthPlace = birthPlace;
         this.workPlace = workPlace;
@@ -23,14 +25,15 @@ public class Person extends Node {
         CSVReader read = new CSVReader();
         ArrayList<String[]> data = read.get(path);
         for (int i = 0; i < data.size(); i++)
-            dict.put(data.get(i)[2], new Person(data.get(i)[0], data.get(i)[1], data.get(i)[2], data.get(i)[3], data.get(i)[4], data.get(i)[5]));
+            dict.put(data.get(i)[2], new Person(data.get(i)[0], data.get(i)[1], data.get(i)[2], data.get(i)[3], data.get(i)[4],data.get(i)[5]));
     }
 
     public static void showData() {
         Enumeration e = dict.elements();
         while (e.hasMoreElements()) {
-            System.out.println(e.nextElement());
-        }
+            Person temp = (Person) e.nextElement();
+            System.out.println(temp.name +" , "+temp.lastName +" , "+temp.key +" , "+temp.birthDate +" , "+temp.birthPlace );
+    }
     }
     public Dictionary<String,Person> find_House(Dictionary<String,Person> dictionary){
         Dictionary<String,Person> dic_find_House= null;
@@ -61,13 +64,14 @@ public class Person extends Node {
         return dic_find_Machine;
     }
 
-/*    public void sazmanipeople(String num) {
-        ArrayList<String> pesonjob = new ArrayList<>();
-        pesonjob.add()
-        for (int i = 0; i < data.size(); i++)
-            for (int j = 0; j < pesonjob.size(); j++)
-                if (data.get(i)[5].equals(pesonjob.get(j))) {
-                    continue;
-                }
-    }*/
+    static public void findSazmani(Dictionary<String,Person> dictionary) {
+        Dictionary<String,Person> dic_find = null;
+        Enumeration e = dictionary.elements();
+        while (e.hasMoreElements()){
+            Person person = (Person)e.nextElement();
+            if(person.workPlace.equals("گمرک") || person.workPlace.equals("بنادر")){
+                dic_find.put(person.key,person);
+            }
+        }
+    }
 }

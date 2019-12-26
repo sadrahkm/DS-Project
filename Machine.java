@@ -26,7 +26,8 @@ public class Machine extends Node {
     public static void showData() {
         Enumeration e = dict.elements();
         while (e.hasMoreElements()) {
-            System.out.println(e.nextElement());
+            Machine temp = (Machine) e.nextElement();
+            System.out.println(temp.pelak +" , "+temp.personCode +" , "+temp.color +" , "+temp.model );
         }
     }
 }

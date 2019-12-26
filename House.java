@@ -6,7 +6,7 @@ public class House extends Node {
     String codePosti;
     String metraj;
     String address;
-    String key = codePosti;
+    String key ;
     static Dictionary<String, House> dict = new Hashtable<>();
 
     House(String personCode, String price, String codePosti, String metraj, String address) {
@@ -15,6 +15,7 @@ public class House extends Node {
         this.codePosti = codePosti;
         this.metraj = metraj;
         this.address = address;
+        this.key= codePosti;
     }
 
     public static void make(String path) {
@@ -27,7 +28,8 @@ public class House extends Node {
     public static void showData() {
         Enumeration e = dict.elements();
         while (e.hasMoreElements()) {
-            System.out.println(e.nextElement());
+            House temp = (House) e.nextElement();
+            System.out.println(temp.personCode +" , "+temp.price +" , "+temp.codePosti +" , "+temp.metraj +" , "+temp.address );
         }
     }
 }
