@@ -26,7 +26,8 @@ public class BankAccount extends Node {
     public static void showData() {
         Enumeration e = dict.elements();
         while (e.hasMoreElements()) {
-            System.out.println(e.nextElement());
+            BankAccount temp = (BankAccount) e.nextElement();
+            System.out.println(temp.ownerAccount +" , "+temp.bank +" , "+temp.shebaNum +" , "+temp.accountNum );
         }
     }
 }

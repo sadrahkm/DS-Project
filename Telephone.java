@@ -25,7 +25,8 @@ public class Telephone extends Node {
     public static void showData() {
         Enumeration e = dict.elements();
         while (e.hasMoreElements()) {
-            System.out.println(e.nextElement());
+            Telephone temp = (Telephone) e.nextElement();
+            System.out.println(temp.personCode +" , "+temp.number +" , "+temp.operator  );
         }
     }
 }
