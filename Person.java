@@ -33,13 +33,14 @@ public class Person extends Node {
         }
     }
 
-/*    public void sazmanipeople(String num) {
-        ArrayList<String> pesonjob = new ArrayList<>();
-        pesonjob.add()
-        for (int i = 0; i < data.size(); i++)
-            for (int j = 0; j < pesonjob.size(); j++)
-                if (data.get(i)[5].equals(pesonjob.get(j))) {
-                    continue;
-                }
-    }*/
+    static public void findSazmani(Dictionary<String,Person> dictionary) {
+        Dictionary<String,Person> dic_find = null;
+        Enumeration e = dictionary.elements();
+        while (e.hasMoreElements()){
+            Person person = (Person)e.nextElement();
+            if(person.workPlace.equals("گمرک") || person.workPlace.equals("بنادر")){
+                dic_find.put(person.key,person);
+            }
+        }
+    }
 }
