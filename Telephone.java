@@ -19,7 +19,7 @@ public class Telephone extends Node {
         CSVReader read = new CSVReader();
         ArrayList<String[]> data = read.get(path);
         for (int i = 0; i < data.size(); i++)
-            dict.put(data.get(i)[2], new Telephone(data.get(i)[0], data.get(i)[1], data.get(i)[2]));
+            dict.put(data.get(i)[0], new Telephone(data.get(i)[0], data.get(i)[1], data.get(i)[2]));
     }
 
     public static void showData() {
