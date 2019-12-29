@@ -10,6 +10,7 @@ public class Main {
         House.make("src/data/homes.csv");
         BankAccount.make("src/data/accounts.csv");
         Telephone.make("src/data/phones.csv");
+        Relation.make("src/data/relationships.csv");
         Dictionary<String, Person> temp = Person.find_Sazmani();
         Enumeration e = temp.elements();
         while (e.hasMoreElements()) {
@@ -25,5 +26,7 @@ public class Main {
         House.showData();
         System.out.println("---------------------");
         BankAccount.showData();
+        System.out.println("---------------------");
+        Relation.showData();
     }
 }
