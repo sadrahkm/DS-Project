@@ -25,7 +25,7 @@ public class Person extends Node {
         CSVReader read = new CSVReader();
         ArrayList<String[]> data = read.get(path);
         for (int i = 0; i < data.size(); i++)
-            dict.put(data.get(i)[2], new Person(data.get(i)[0], data.get(i)[1], data.get(i)[2], data.get(i)[3], data.get(i)[4], data.get(i)[5],));
+            dict.put(data.get(i)[2], new Person(data.get(i)[0], data.get(i)[1], data.get(i)[2], data.get(i)[3], data.get(i)[4], data.get(i)[5]));
     }
 
     public static void showData() {
@@ -48,6 +48,21 @@ public class Person extends Node {
             }
         }
         return dic_find_House;
+    }
+    public Dictionary<String,Person> find_relationship(Dictionary<String,Person> dictionary)
+    {
+        Dictionary<String,Person> dic_find_relationship = null;
+        Enumeration e1 = dictionary.keys();
+        Enumeration e2 = Relation.dict.elements();
+        while(e1.hasMoreElements()){
+            Relation p = (Relation)e1.nextElement();
+            while(e2.hasMoreElements()){
+                if(e2.nextElement().equals(((Person)p.from).key)){
+                    dic_find_relationship.put(((Person)p.to).key,(Person)p.to);
+                }
+            }
+        }
+        return dic_find_relationship;
     }
     public Dictionary<String,Person> find_Machine(Dictionary<String,String> dictionary){
         Dictionary<String,Person> dic_find_Machine = null;
