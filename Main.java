@@ -11,6 +11,7 @@ public class Main {
         BankAccount.make("src/data/accounts.csv");
         Telephone.make("src/data/phones.csv");
         Relation.make("src/data/relationships.csv");
+        Malekiat.make("src/data/relationships.csv");
         Dictionary<String, Person> temp = Person.find_Sazmani();
         Enumeration e = temp.elements();
         while (e.hasMoreElements()) {
