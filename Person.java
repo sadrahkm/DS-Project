@@ -49,9 +49,14 @@ public class Person extends Node {
     }
     public boolean is2year(String find) {
         Enumeration e1 = Malekiat.dict.keys();
+        Enumeration e2 = Malekiat.dict.elements();
+        int Number;
         while (e1.hasMoreElements()) {
-            if (e1.nextElement().equals(find))
-                return true;
+            if (e1.nextElement().equals(find)) {
+                Number = Integer.parseInt(((Malekiat) e2.nextElement()).tamalokTime.substring(0, 3));
+                if (2020 - Number < 2)
+                    return true;
+            }
         }
         return false;
     }
@@ -69,6 +74,7 @@ public class Person extends Node {
         }
         return dic_find_relationship;
     }
+
     public Dictionary<String, Person> find_House(Dictionary<String, Person> dictionary) {
         Dictionary<String, Person> dic_find_House = null;
         Enumeration e1 = House.dict.elements();
@@ -85,6 +91,7 @@ public class Person extends Node {
         }
         return dic_find_House;
     }
+
     public Dictionary<String, Person> find_Machine(Dictionary<String, String> dictionary) {
         Dictionary<String, Person> dic_find_Machine = null;
         Enumeration e1 = Machine.dict.elements();
