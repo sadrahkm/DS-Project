@@ -36,9 +36,9 @@ public class Person extends Node {
         }
     }
 
-    static public Dictionary<String, Person> find_Sazmani() {
+    static public Dictionary<String, Person> find_Sazmani(Dictionary<String, Person> dictionary) {
         Dictionary<String, Person> dic_find = new Hashtable<>();
-        Enumeration e = dict.elements();
+        Enumeration e = dictionary.elements();
         while (e.hasMoreElements()) {
             Person person = (Person) e.nextElement();
             if (person.workPlace.equals("\"گمرک\"") || person.workPlace.equals("\"بندر\"")) {
@@ -107,5 +107,39 @@ public class Person extends Node {
             }
         }
         return dic_find_Machine;
+    }
+
+    public Dictionary<String, Person> find_smug() {
+        Dictionary<String, Person> result = new Hashtable<>();
+        Enumeration persons = Person.dict.elements();
+        while (persons.hasMoreElements()) {
+            Person person = (Person) (persons.nextElement());
+            if (person.workPlace.equals("قاچاقچی")) {
+                result.put(person.code, person);
+            }
+        }
+        return result;
+    }
+
+    public Dictionary<String, Person> personsRelGhachaghchi() {
+        Dictionary<String, Person> result = new Hashtable<>();
+        Dictionary<String, Person> dict_smug = find_smug();
+        Enumeration transactions = Tarakonesh.dict.elements();
+        Enumeration enumSmug;
+        Person smugPerson;
+        BankAccount accountFrom;
+        BankAccount accountTo;
+        while (transactions.hasMoreElements()) {
+            enumSmug = dict_smug.elements();
+            accountFrom = (BankAccount) ((Tarakonesh) transactions.nextElement()).from;
+            accountTo = (BankAccount) ((Tarakonesh) transactions.nextElement()).to;
+            while (enumSmug.hasMoreElements()) {
+                smugPerson = (Person) enumSmug.nextElement();
+                if (accountFrom.ownerAccount.equals(smugPerson.key)) {
+                    result.put(accountTo.accountNum, Person.dict.get(accountTo.accountNum));
+                }
+            }
+        }
+        return result;
     }
 }
