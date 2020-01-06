@@ -47,6 +47,7 @@ public class Person extends Node {
         }
         return dic_find;
     }
+
     public boolean is2year(String find) {
         Enumeration e1 = Malekiat.dict.keys();
         Enumeration e2 = Malekiat.dict.elements();
@@ -60,8 +61,30 @@ public class Person extends Node {
         }
         return false;
     }
+
+    public Dictionary<String, Person> find_Machine_or_House(Dictionary<String, Person> dictionary) {
+        Dictionary<String, Person> dic_find_machine_or_house = new Hashtable<>();
+        Enumeration houseEnumeration = House.dict.elements();
+        Enumeration machineEnumeration = Machine.dict.elements();
+        while (houseEnumeration.hasMoreElements() || machineEnumeration.hasMoreElements()) {
+            Enumeration e1 = dictionary.keys();
+            House H = (House) houseEnumeration.nextElement();
+            Machine M = (Machine) machineEnumeration.nextElement();
+            while (e1.hasMoreElements()) {
+                if (e1.nextElement().equals(H.personCode) && is2year(((House) houseEnumeration.nextElement()).key)) {
+                    dic_find_machine_or_house.put(H.personCode, dict.get(H.personCode));
+                }
+                if (e1.nextElement().equals(M.personCode) && is2year(((Machine) machineEnumeration.nextElement()).key)) {
+                    dic_find_machine_or_house.put(M.personCode, dict.get(M.personCode));
+                }
+            }
+        }
+        return dic_find_machine_or_house;
+    }
+
     public Dictionary<String, Person> find_relationship(Dictionary<String, Person> dictionary) {
-        Dictionary<String, Person> dic_find_relationship = null;
+        Dictionary<String, Person> dic_find_relationship = new Hashtable<>();
+        Dictionary<String, Person> dic_find_machine_or_house_for_relationship = new Hashtable<>();
         Enumeration e1 = dictionary.keys();
         Enumeration e2 = Relation.dict.elements();
         while (e1.hasMoreElements()) {
@@ -72,41 +95,22 @@ public class Person extends Node {
                 }
             }
         }
-        return dic_find_relationship;
-    }
-
-    public Dictionary<String, Person> find_House(Dictionary<String, Person> dictionary) {
-        Dictionary<String, Person> dic_find_House = null;
-        Enumeration e1 = House.dict.elements();
-        Enumeration e2 = dictionary.keys();
-        while (e1.hasMoreElements()) {
-            House k = (House) e1.nextElement();
-            while (e2.hasMoreElements()) {
-                if (e2.nextElement().equals(k.personCode)) {
-                    if (is2year(((House) e1.nextElement()).key)) {
-                        dic_find_House.put(k.personCode, dict.get(k.personCode));
-                    }
+        Enumeration houseEnumeration = House.dict.elements();
+        Enumeration machineEnumeration = Machine.dict.elements();
+        while (houseEnumeration.hasMoreElements() || machineEnumeration.hasMoreElements()) {
+            Enumeration relationshipEnumaration = dic_find_relationship.keys();
+            House H = (House) houseEnumeration.nextElement();
+            Machine M = (Machine) machineEnumeration.nextElement();
+            while (relationshipEnumaration.hasMoreElements()) {
+                if (relationshipEnumaration.nextElement().equals(H.personCode) && is2year(((House) houseEnumeration.nextElement()).key)) {
+                    dic_find_machine_or_house_for_relationship.put(H.personCode, dict.get(H.personCode));
+                }
+                if (e1.nextElement().equals(M.personCode) && is2year(((Machine) machineEnumeration.nextElement()).key)) {
+                    dic_find_machine_or_house_for_relationship.put(M.personCode, dict.get(M.personCode));
                 }
             }
         }
-        return dic_find_House;
-    }
-
-    public Dictionary<String, Person> find_Machine(Dictionary<String, String> dictionary) {
-        Dictionary<String, Person> dic_find_Machine = null;
-        Enumeration e1 = Machine.dict.elements();
-        Enumeration e2 = dictionary.keys();
-        while (e1.hasMoreElements()) {
-            Machine m = (Machine) e1.nextElement();
-            while (e2.hasMoreElements()) {
-                if (e2.nextElement().equals(m.personCode)) {
-                    if (is2year(((Machine) e1.nextElement()).key)) {
-                        dic_find_Machine.put(m.personCode, dict.get(m.personCode));
-                    }
-                }
-            }
-        }
-        return dic_find_Machine;
+        return dic_find_machine_or_house_for_relationship;
     }
 
     public Dictionary<String, Person> find_smug() {
