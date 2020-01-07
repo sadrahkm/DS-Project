@@ -41,26 +41,27 @@ public class Person extends Node {
         Enumeration e = dict.elements();
         while (e.hasMoreElements()) {
             Person person = (Person) e.nextElement();
-            if (person.workPlace.equals("\"گمرک\"") || person.workPlace.equals("\"بندر\"")) {
+            if (person.workPlace.equals("گمرک") || person.workPlace.equals("بندر")) {
                 dic_find.put(person.key, person);
             }
         }
         return dic_find;
     }
-    public boolean is2year(String find) {
-        Enumeration e1 = Malekiat.dict.keys();
+    public static boolean is2year(String find) {
         Enumeration e2 = Malekiat.dict.elements();
-        int Number;
-        while (e1.hasMoreElements()) {
-            if (e1.nextElement().equals(find)) {
-                Number = Integer.parseInt(((Malekiat) e2.nextElement()).tamalokTime.substring(0, 3));
-                if (2020 - Number < 2)
+        Malekiat m=(Malekiat)e2.nextElement();
+        while (e2.hasMoreElements()) {
+            if (((Person)m.from).code.equals(find)){
+                int Number = Integer.parseInt(m.tamalokTime.substring(0, 4));
+                if (2020 - Number < 2) {
                     return true;
+                }
             }
+            m= (Malekiat) e2.nextElement();
         }
         return false;
     }
-    public Dictionary<String, Person> find_relationship(Dictionary<String, Person> dictionary) {
+    public static Dictionary<String, Person> find_relationship(Dictionary<String, Person> dictionary) {
         Dictionary<String, Person> dic_find_relationship = null;
         Enumeration e1 = dictionary.keys();
         Enumeration e2 = Relation.dict.elements();
@@ -75,25 +76,26 @@ public class Person extends Node {
         return dic_find_relationship;
     }
 
-    public Dictionary<String, Person> find_House(Dictionary<String, Person> dictionary) {
-        Dictionary<String, Person> dic_find_House = null;
+    public static Dictionary<String, Person> find_House(Dictionary<String, Person> dictionary) {
+        Dictionary<String, Person> dic_find_House = new Hashtable<>();
         Enumeration e1 = House.dict.elements();
-        Enumeration e2 = dictionary.keys();
         while (e1.hasMoreElements()) {
+            Enumeration e2 = dictionary.keys();
             House k = (House) e1.nextElement();
             while (e2.hasMoreElements()) {
-                if (e2.nextElement().equals(k.personCode)) {
-                    if (is2year(((House) e1.nextElement()).key)) {
+                if ((e2.nextElement()).equals(k.personCode)) {
+                    if (is2year(k.personCode)) {
                         dic_find_House.put(k.personCode, dict.get(k.personCode));
                     }
                 }
             }
         }
-        return dic_find_House;
-    }
+            return dic_find_House;
+        }
 
-    public Dictionary<String, Person> find_Machine(Dictionary<String, String> dictionary) {
-        Dictionary<String, Person> dic_find_Machine = null;
+
+    public static Dictionary<String, Person> find_Machine(Dictionary<String, Person> dictionary) {
+        Dictionary<String, Person> dic_find_Machine = new Hashtable<>();
         Enumeration e1 = Machine.dict.elements();
         Enumeration e2 = dictionary.keys();
         while (e1.hasMoreElements()) {
