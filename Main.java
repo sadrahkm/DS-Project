@@ -1,5 +1,7 @@
 //package com.company;
 
+import javafx.css.CssParser;
+
 import java.io.*;
 import java.util.*;
 
@@ -31,5 +33,19 @@ public class Main {
         BankAccount.showData();
         System.out.println("---------------------");
         Relation.showData();
+        System.out.println("Sazmani");
+        print(Person.find_Sazmani());
+        Dictionary<String, Person> dic_find_House = Person.find_House(Person.find_Sazmani());
+        System.out.println("House");
+        print(dic_find_House);
+
+
+    }
+    public static void print (Dictionary<String, Person> dictionary) {
+        Enumeration e = dictionary.elements();
+        while (e.hasMoreElements()) {
+            Person temp = (Person) e.nextElement();
+            System.out.println(temp.name + " , " + temp.lastName + " , " + temp.key + " , " + temp.birthDate + " , " + temp.birthPlace);
+        }
     }
 }
