@@ -16,12 +16,6 @@ public class Main {
         Malekiat.make("src/data/ownerships.csv");
         Call.make("src/data/calls.csv");
         Tarakonesh.make("src/data/transactions.csv");
-        Dictionary<String, Person> temp = Person.find_Sazmani();
-        Enumeration e = temp.elements();
-        while (e.hasMoreElements()) {
-            Person p = (Person) e.nextElement();
-            System.out.println(p.name);
-        }
         Telephone.showData();
         System.out.println("---------------------");
         Person.showData();
@@ -34,11 +28,11 @@ public class Main {
         System.out.println("---------------------");
         Relation.showData();
         System.out.println("Sazmani");
-        print(Person.find_Sazmani());
-        Dictionary<String, Person> dic_find_House = Person.find_House(Person.find_Sazmani());
+        print(Person.find_Sazmani(Person.dict));
+        System.out.println("*****");
+        Dictionary<String, Person> dic_find_House = Person.find_Machine_or_House(Person.find_Sazmani(Person.dict));
         System.out.println("House");
         print(dic_find_House);
-
 
     }
     public static void print (Dictionary<String, Person> dictionary) {
