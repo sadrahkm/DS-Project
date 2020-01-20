@@ -47,19 +47,13 @@ public class Person extends Node {
         }
         return dic_find;
     }
-  
+
     public static boolean is2year(String find) {
-        Enumeration e1 = Malekiat.dict.keys();
-        Enumeration e2 = Malekiat.dict.elements();
-        Malekiat m=(Malekiat)e2.nextElement();
-        while (e2.hasMoreElements()) {
-            if (((Person)m.from).code.equals(find)){
-                int Number = Integer.parseInt(m.tamalokTime.substring(0, 4));
-                if (2020 - Number < 2) {
-                    return true;
-                }
+        Enumeration e1 = Malekiat.dict.elements();
+        while (e1.hasMoreElements()) {
+            if ((((Malekiat) e1.nextElement()).from).equals(find)) {
+                return true;
             }
-            m= (Malekiat) e2.nextElement();
         }
         return false;
     }
