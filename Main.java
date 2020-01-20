@@ -38,7 +38,10 @@ public class Main {
         Dictionary<String, Person> dic_find_House_orMachine_rel = Person.find_Machine_or_House(Person.find_relationship(Person.find_Sazmani((Person.dict))));
         print(dic_find_House_orMachine_rel);
         System.out.println("_________________________________________");
-        print(Person.personsRelGhachaghchi());
+     //   print(Person.personsRelGhachaghchi());
+        System.out.println("sazmani and relation sazmani who have machine and house and smug gave them money");
+        print(Person.find_Machine_or_House(Person.find_Sazmani(Person.personsRelGhachaghchi())));
+        print(Person.find_Machine_or_House(Person.find_relationship(Person.find_Sazmani(Person.personsRelGhachaghchi()))));
     }
 
     public static void print(Dictionary<String, Person> dictionary) {

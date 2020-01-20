@@ -123,21 +123,18 @@ public class Person extends Node {
         Enumeration transactions = Tarakonesh.dict.elements();
         Enumeration enumSmug;
         Person smugPerson;
-        Tarakonesh tr= (Tarakonesh) transactions.nextElement();
-        BankAccount accountFrom=(BankAccount) tr.from;
-        BankAccount accountTo= (BankAccount) tr.to;
+        Tarakonesh tr;
+        BankAccount accountFrom;
+        BankAccount accountTo;
         while (transactions.hasMoreElements()) {
             enumSmug = dict_smug.elements();
             tr= (Tarakonesh) transactions.nextElement();
-            System.out.println(tr.from);
             accountFrom = (BankAccount) tr.from;
             accountTo = (BankAccount) tr.to;
             while (enumSmug.hasMoreElements()) {
                 smugPerson = (Person) enumSmug.nextElement();
-                System.out.println(accountFrom);
-                System.out.println(smugPerson);
                 if (accountFrom.ownerAccount.equals(smugPerson.key)) {
-                    result.put(accountTo.accountNum, Person.dict.get(accountTo.accountNum));
+                    result.put(accountTo.ownerAccount, Person.dict.get(accountTo.ownerAccount));
                 }
             }
         }
