@@ -29,17 +29,23 @@ public class Main {
         Relation.showData();
         System.out.println("Sazmani");
         print(Person.find_Sazmani(Person.dict));
-        System.out.println("*****");
-        Dictionary<String, Person> dic_find_House = Person.find_Machine_or_House(Person.find_Sazmani(Person.dict));
-        System.out.println("House");
-        print(dic_find_House);
-
+        System.out.println("_________________________________________");
+        Dictionary<String, Person> dic_find_House_orMachine = Person.find_Machine_or_House(Person.find_Sazmani((Person.dict)));
+        System.out.println("********* Sazmani people who have house and machine ***************");
+        print(dic_find_House_orMachine);
+        System.out.println("_________________________________________");
+        System.out.println("********* relation Sazmani people who have house and machine ***************");
+        Dictionary<String, Person> dic_find_House_orMachine_rel = Person.find_Machine_or_House(Person.find_relationship(Person.find_Sazmani((Person.dict))));
+        print(dic_find_House_orMachine_rel);
+        System.out.println("_________________________________________");
+        print(Person.personsRelGhachaghchi());
     }
-    public static void print (Dictionary<String, Person> dictionary) {
+
+    public static void print(Dictionary<String, Person> dictionary) {
         Enumeration e = dictionary.elements();
         while (e.hasMoreElements()) {
             Person temp = (Person) e.nextElement();
-            System.out.println(temp.name + " , " + temp.lastName + " , " + temp.key + " , " + temp.birthDate + " , " + temp.birthPlace);
+            System.out.println(temp.name + "  " + temp.lastName);
         }
     }
 }

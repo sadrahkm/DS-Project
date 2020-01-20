@@ -16,10 +16,10 @@ public class Tarakonesh extends Yal {
     }
 
     public static void make(String path) {
-        CSVReader read = new CSVReader();
-        ArrayList<String[]> data = read.get(path);
         BankAccount accountFrom;
         BankAccount accountTo;
+        CSVReader read = new CSVReader();
+        ArrayList<String[]> data = read.get(path);
         for (int i = 0; i < data.size(); i++) {
             accountFrom = BankAccount.dict.get(data.get(i)[0]);
             accountTo = BankAccount.dict.get(data.get(i)[1]);

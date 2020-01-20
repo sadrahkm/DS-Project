@@ -49,34 +49,39 @@ public class Person extends Node {
     }
   
     public static boolean is2year(String find) {
-        Enumeration e1 = Malekiat.dict.keys();
         Enumeration e2 = Malekiat.dict.elements();
-        Malekiat m=(Malekiat)e2.nextElement();
         while (e2.hasMoreElements()) {
+            Malekiat m= (Malekiat) e2.nextElement();
             if (((Person)m.from).code.equals(find)){
                 int Number = Integer.parseInt(m.tamalokTime.substring(0, 4));
                 if (2020 - Number < 2) {
                     return true;
                 }
             }
-            m= (Malekiat) e2.nextElement();
         }
         return false;
     }
 
     public static Dictionary<String, Person> find_Machine_or_House(Dictionary<String, Person> dictionary) {
         Dictionary<String, Person> dic_find_machine_or_house = new Hashtable<>();
-        Enumeration houseEnumeration = House.dict.elements();
         Enumeration machineEnumeration = Machine.dict.elements();
-        while (houseEnumeration.hasMoreElements() || machineEnumeration.hasMoreElements()) {
-            Enumeration e1 = dictionary.keys();
+        Enumeration houseEnumeration = House.dict.elements();
+        while (houseEnumeration.hasMoreElements() ) {
+            Enumeration e1 = dictionary.elements();
             House H = (House) houseEnumeration.nextElement();
-            Machine M = (Machine) machineEnumeration.nextElement();
             while (e1.hasMoreElements()) {
-                if (e1.nextElement().equals(H.personCode) && is2year(((House) houseEnumeration.nextElement()).key)) {
+               Person p= (Person) e1.nextElement();
+                if (p.code.equals(H.personCode) && is2year(H.personCode) ) {
                     dic_find_machine_or_house.put(H.personCode, dict.get(H.personCode));
                 }
-                if (e1.nextElement().equals(M.personCode) && is2year(((Machine) machineEnumeration.nextElement()).key)) {
+            }
+        }
+        while ( machineEnumeration.hasMoreElements()) {
+            Enumeration e1 = dictionary.elements();
+            Machine M = (Machine) machineEnumeration.nextElement();
+            while (e1.hasMoreElements()) {
+                Person p= (Person) e1.nextElement();
+                if (p.code.equals(M.personCode) && is2year(M.personCode)  ){
                     dic_find_machine_or_house.put(M.personCode, dict.get(M.personCode));
                 }
             }
@@ -86,36 +91,21 @@ public class Person extends Node {
 
     public static Dictionary<String, Person> find_relationship(Dictionary<String, Person> dictionary) {
         Dictionary<String, Person> dic_find_relationship = new Hashtable<>();
-        Dictionary<String, Person> dic_find_machine_or_house_for_relationship = new Hashtable<>();
         Enumeration e1 = dictionary.keys();
         Enumeration e2 = Relation.dict.elements();
         while (e1.hasMoreElements()) {
-            Relation p = (Relation) e1.nextElement();
+            String p = (String) e1.nextElement();
             while (e2.hasMoreElements()) {
-                if (e2.nextElement().equals(((Person) p.from).key)) {
-                    dic_find_relationship.put(((Person) p.to).key, (Person) p.to);
+                Relation p2 = (Relation) e2.nextElement();
+                if (p.equals(((Person) p2.from).key)) {
+                    dic_find_relationship.put(((Person) p2.to).key, (Person) p2.to);
                 }
             }
         }
-        Enumeration houseEnumeration = House.dict.elements();
-        Enumeration machineEnumeration = Machine.dict.elements();
-        while (houseEnumeration.hasMoreElements() || machineEnumeration.hasMoreElements()) {
-            Enumeration relationshipEnumaration = dic_find_relationship.keys();
-            House H = (House) houseEnumeration.nextElement();
-            Machine M = (Machine) machineEnumeration.nextElement();
-            while (relationshipEnumaration.hasMoreElements()) {
-                if (relationshipEnumaration.nextElement().equals(H.personCode) && is2year(((House) houseEnumeration.nextElement()).key)) {
-                    dic_find_machine_or_house_for_relationship.put(H.personCode, dict.get(H.personCode));
-                }
-                if (e1.nextElement().equals(M.personCode) && is2year(((Machine) machineEnumeration.nextElement()).key)) {
-                    dic_find_machine_or_house_for_relationship.put(M.personCode, dict.get(M.personCode));
-                }
-            }
-        }
-        return dic_find_machine_or_house_for_relationship;
+       return dic_find_relationship;
     }
 
-    public Dictionary<String, Person> find_smug() {
+    public static Dictionary<String, Person> find_smug() {
         Dictionary<String, Person> result = new Hashtable<>();
         Enumeration persons = Person.dict.elements();
         while (persons.hasMoreElements()) {
@@ -127,20 +117,25 @@ public class Person extends Node {
         return result;
     }
 
-    public Dictionary<String, Person> personsRelGhachaghchi() {
+    public static Dictionary<String, Person> personsRelGhachaghchi() {
         Dictionary<String, Person> result = new Hashtable<>();
         Dictionary<String, Person> dict_smug = find_smug();
         Enumeration transactions = Tarakonesh.dict.elements();
         Enumeration enumSmug;
         Person smugPerson;
-        BankAccount accountFrom;
-        BankAccount accountTo;
+        Tarakonesh tr= (Tarakonesh) transactions.nextElement();
+        BankAccount accountFrom=(BankAccount) tr.from;
+        BankAccount accountTo= (BankAccount) tr.to;
         while (transactions.hasMoreElements()) {
             enumSmug = dict_smug.elements();
-            accountFrom = (BankAccount) ((Tarakonesh) transactions.nextElement()).from;
-            accountTo = (BankAccount) ((Tarakonesh) transactions.nextElement()).to;
+            tr= (Tarakonesh) transactions.nextElement();
+            System.out.println(tr.from);
+            accountFrom = (BankAccount) tr.from;
+            accountTo = (BankAccount) tr.to;
             while (enumSmug.hasMoreElements()) {
                 smugPerson = (Person) enumSmug.nextElement();
+                System.out.println(accountFrom);
+                System.out.println(smugPerson);
                 if (accountFrom.ownerAccount.equals(smugPerson.key)) {
                     result.put(accountTo.accountNum, Person.dict.get(accountTo.accountNum));
                 }
