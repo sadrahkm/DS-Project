@@ -150,15 +150,17 @@ public class Person extends Node {
         String pId;
         while (call.hasMoreElements()) {
             Enumeration enumsmug = dict_smug.keys();
-            pId = (String) enumsmug.nextElement();
             Call c = (Call) (call.nextElement());
-            if (((Telephone) (c.from)).personCode.equals(pId)) {
-                result.put(((Telephone) (c.to)).personCode, Person.dict.get(((Telephone) (c.to)).personCode));
-            }
-            if (((Telephone) (c.to)).personCode.equals(pId)) {
-                result.put(((Telephone) (c.from)).personCode, Person.dict.get(((Telephone) (c.from)).personCode));
+            while (enumsmug.hasMoreElements()) {
+                pId = (String) enumsmug.nextElement();
+                if (((Telephone) (c.from)).personCode.equals(pId)) {
+                    result.put(((Telephone) (c.to)).personCode, Person.dict.get(((Telephone) (c.to)).personCode));
+                }
+                if (((Telephone) (c.to)).personCode.equals(pId)) {
+                    result.put(((Telephone) (c.from)).personCode, Person.dict.get(((Telephone) (c.from)).personCode));
+                }
             }
         }
-        return result;
+            return result;
     }
 }
