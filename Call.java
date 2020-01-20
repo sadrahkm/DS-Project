@@ -7,7 +7,7 @@ public class Call extends Yal {
     String key ;
     static Dictionary<String, Call> dict = new Hashtable<>();
 
-    Call(String from, String to , String tellNumber, String date, String duration){
+    Call(Telephone from, Telephone to , String tellNumber, String date, String duration){
         this.from=from;
         this.to= to;
         this.tellNumber=tellNumber;
@@ -17,10 +17,16 @@ public class Call extends Yal {
     }
 
     public static void make(String path) {
+        Telephone callfrpm;
+        Telephone callto;
         CSVReader read = new CSVReader();
         ArrayList<String[]> data = read.get(path);
-        for (int i = 0; i < data.size(); i++)
-            dict.put( data.get(i)[2] , new Call(data.get(i)[0], data.get(i)[1], data.get(i)[2],data.get(i)[3],data.get(i)[4]));
+
+        for (int i = 0; i < data.size(); i++) {
+            callfrpm=Telephone.dict.get(data.get(i)[0]);
+            callto=Telephone.dict.get(data.get(i)[1]);
+            dict.put(data.get(i)[2], new Call(callfrpm, callto, data.get(i)[2], data.get(i)[3], data.get(i)[4]));
+        }
     }
 
 }
