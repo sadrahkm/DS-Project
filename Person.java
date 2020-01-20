@@ -47,7 +47,7 @@ public class Person extends Node {
         }
         return dic_find;
     }
-  
+
     public static boolean is2year(String find) {
         Enumeration e2 = Malekiat.dict.elements();
         while (e2.hasMoreElements()) {
@@ -139,5 +139,26 @@ public class Person extends Node {
             }
         }
         return result;
+    }
+    public Dictionary<String, Person> person_called() {
+        Dictionary<String, Person> result = new Hashtable<>();
+        Dictionary<String, Person> dict_smug = find_smug();
+        Enumeration telephone = Telephone.dict.elements();
+        Enumeration call = Call.dict.elements();
+        String pId;
+        while (call.hasMoreElements()) {
+            Enumeration enumsmug = dict_smug.keys();
+            Call c = (Call) (call.nextElement());
+            while (enumsmug.hasMoreElements()) {
+                pId = (String) enumsmug.nextElement();
+                if (((Telephone) (c.from)).personCode.equals(pId)) {
+                    result.put(((Telephone) (c.to)).personCode, Person.dict.get(((Telephone) (c.to)).personCode));
+                }
+                if (((Telephone) (c.to)).personCode.equals(pId)) {
+                    result.put(((Telephone) (c.from)).personCode, Person.dict.get(((Telephone) (c.from)).personCode));
+                }
+            }
+        }
+            return result;
     }
 }
