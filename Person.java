@@ -1,4 +1,3 @@
-import java.awt.event.PaintEvent;
 import java.util.*;
 
 public class Person extends Node {
@@ -117,9 +116,8 @@ public class Person extends Node {
         return result;
     }
 
-    public static Dictionary<String, Person> personsRelGhachaghchi() {
+    public static Dictionary<String, Person> personsRelGhachaghchi(Dictionary<String, Person> dictionary) {
         Dictionary<String, Person> result = new Hashtable<>();
-        Dictionary<String, Person> dict_smug = find_smug();
         Enumeration transactions = Tarakonesh.dict.elements();
         Enumeration enumSmug;
         Person smugPerson;
@@ -127,7 +125,7 @@ public class Person extends Node {
         BankAccount accountFrom;
         BankAccount accountTo;
         while (transactions.hasMoreElements()) {
-            enumSmug = dict_smug.elements();
+            enumSmug = dictionary.elements();
             tr= (Tarakonesh) transactions.nextElement();
             accountFrom = (BankAccount) tr.from;
             accountTo = (BankAccount) tr.to;
@@ -140,10 +138,11 @@ public class Person extends Node {
         }
         return result;
     }
-    public Dictionary<String, Person> person_called() {
+
+    public static Dictionary<String, Person> person_called() {
         Dictionary<String, Person> result = new Hashtable<>();
         Dictionary<String, Person> dict_smug = find_smug();
-        Enumeration telephone = Telephone.dict.elements();
+       // Enumeration telephone = Telephone.dict.elements();
         Enumeration call = Call.dict.elements();
         String pId;
         while (call.hasMoreElements()) {
@@ -151,7 +150,7 @@ public class Person extends Node {
             Call c = (Call) (call.nextElement());
             while (enumsmug.hasMoreElements()) {
                 pId = (String) enumsmug.nextElement();
-                if (((Telephone) (c.from)).personCode.equals(pId)) {
+                if (((Telephone) (c.from)).number.equals(pId)) {
                     result.put(((Telephone) (c.to)).personCode, Person.dict.get(((Telephone) (c.to)).personCode));
                 }
                 if (((Telephone) (c.to)).personCode.equals(pId)) {
