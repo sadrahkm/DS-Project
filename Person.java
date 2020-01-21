@@ -116,7 +116,10 @@ public class Person extends Node {
         return result;
     }
 
+    static int count = 0;
+    static Dictionary<String, Person> all = new Hashtable<>();
     public static Dictionary<String, Person> personsRelGhachaghchi(Dictionary<String, Person> dictionary) {
+        count++;
         Dictionary<String, Person> result = new Hashtable<>();
         Enumeration transactions = Tarakonesh.dict.elements();
         Enumeration enumSmug;
@@ -133,10 +136,14 @@ public class Person extends Node {
                 smugPerson = (Person) enumSmug.nextElement();
                 if (accountFrom.ownerAccount.equals(smugPerson.key)) {
                     result.put(accountTo.ownerAccount, Person.dict.get(accountTo.ownerAccount));
+                    all.put(accountTo.ownerAccount, Person.dict.get(accountTo.ownerAccount));
                 }
             }
         }
-        return result;
+        if(count != 5){
+            personsRelGhachaghchi(result);
+        }
+        return all;
     }
 
     public static Dictionary<String, Person> person_called() {
