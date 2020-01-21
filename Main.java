@@ -1,14 +1,29 @@
 //package com.company;
 
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Person.make("src/data/people.csv");
-        Machine.make("src/data/cars.csv");
-        House.make("src/data/homes.csv");
+        JFileChooser filechooser = new JFileChooser();
+
+        System.out.println("select people.csv");
+        filechooser.showDialog(null,"Open");
+        File person = filechooser.getSelectedFile();
+        Person.make(person.getPath());
+
+        System.out.println("select the car.csv");
+        filechooser.showDialog(null,"Open");
+        File machine = filechooser.getSelectedFile();
+        Machine.make(machine.getPath());
+
+        System.out.println("select the home.csv");
+        filechooser.showDialog(null,"Open");
+        File house = filechooser.getSelectedFile();
+        House.make(house.getPath());
+
         BankAccount.make("src/data/accounts.csv");
         Telephone.make("src/data/phones.csv");
         Relation.make("src/data/relationships.csv");

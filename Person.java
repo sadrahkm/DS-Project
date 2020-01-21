@@ -140,7 +140,7 @@ public class Person extends Node {
                 }
             }
         }
-        if(count != 5){
+        if(count <= 5){
             personsRelGhachaghchi(result);
         }
         return all;
