@@ -5,7 +5,7 @@ public class Call extends Yal {
     String date;
     String duration;
     String key ;
-    static Dictionary<String, Call> dict = new Hashtable<>();
+    static Dictionary<String, Call> dict = new Hashtable<String, Call>();
 
     Call(Telephone from, Telephone to , String tellNumber, String date, String duration){
         this.from=from;
@@ -25,7 +25,7 @@ public class Call extends Yal {
         for (int i = 0; i < data.size(); i++) {
             callfrpm=Telephone.dict.get(data.get(i)[0]);
             callto=Telephone.dict.get(data.get(i)[1]);
-            dict.put(data.get(i)[2], new Call(callfrpm, callto, data.get(i)[2], data.get(i)[3], data.get(i)[4]));
+            dict.put( data.get(i)[2], new Call(callfrpm, callto, data.get(i)[2], data.get(i)[3], data.get(i)[4]));
         }
     }
 
